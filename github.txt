@@ -1,0 +1,4 @@
+git remote add origin https://github.com/adityadesaia3/vehicle_detection_and_speed_estimation.git
+git push -u origin master
+
+# Need to change this asap

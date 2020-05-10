@@ -1,0 +1,22 @@
+{% extends "header_footer.html" %}
+
+    {% block content %}
+
+            <!-- Successful Upload -->
+            <div class="row">
+                <div class="col-sm-12 justify-content-center">
+                    <div class="display-5">File Upload successful</div>
+                </div>
+            </div>
+            
+            <hr>
+
+            <button type="submit" class="btn btn-outline-light">
+                <a href="{{url_for("analyze_video")}}">Click here to analyze the video!</a>
+            </button>
+
+            
+    {% endblock %}
+
+
+

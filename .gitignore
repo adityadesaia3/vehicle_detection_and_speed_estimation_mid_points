@@ -1,0 +1,6 @@
+*.avi
+*.jpg
+*.mp4
+yolov3.weights
+/__pycache__
+*.png
