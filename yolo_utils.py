@@ -100,6 +100,9 @@ def is_point_inside(bottom_mid_point):
     y = bottom_mid_point[1]
 
     # Need modification CRUCIAL
+    # p = path.Path([(top_left_coordinates_x, top_left_coordinates_y), (top_right_coordinates_x, top_right_coordinates_y), (bottom_left_coordinates_x, bottom_left_coordinates_y), (bottom_right_coordinates_x, bottom_right_coordinates_y)])
+    # return p.contains_points([(x, y)])[0]
+    
     if top_left_coordinates_x <= x <= top_right_coordinates_x or bottom_left_coordinates_x <= x <= bottom_right_coordinates_x:
         if top_left_coordinates_y <= y <= bottom_left_coordinates_y or top_right_coordinates_y <= y <= bottom_right_coordinates_y:
             return True 
