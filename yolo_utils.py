@@ -329,12 +329,13 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
 
                             perpendicular_distance = perpendicular_distance_from_second_line(bottom_mid_point[0], bottom_mid_point[1])
                             print(f"Perpendicular distance: {perpendicular_distance}\tMinimum Distance: {minimum_distance}")
-                            if perpendicular_distance < minimum_distance:
+                            if perpendicular_distance > minimum_distance:
                                 vehicle_number = None
                         except:
                             print("Unexpected error:", sys.exc_info()[0])
                         finally:
-                            t_cursor.close()
+                            if t_cursor:
+                                t_cursor.close()
                             t_connection.close()
                         
                         if vehicle_number:
