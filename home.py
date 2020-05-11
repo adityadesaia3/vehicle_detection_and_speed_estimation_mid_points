@@ -12,6 +12,9 @@ from yolo_utils import assign_calibration_coordinates
 # for displaying speeds
 from display_speeds import fetching_speed_values_from_database
 
+# for generating pdf
+import pdfkit
+
 app = Flask(__name__)
 app.secret_key = b'qE7psRxhW}QUu\Mb'
 filename = ""
@@ -109,10 +112,27 @@ def result_of_analyze():
     return redirect(url_for("display"))
 
 
-@app.route("/display", methods=['GET', 'POST'])
+@app.route("/display")
 def display():
     speeds = fetching_speed_values_from_database()
     return render_template("display.html", speeds=speeds)
+
+
+@app.route("/email_sent", methods=['GET', 'POST'])
+def email_sent():
+
+    # generate PDF
+    pdf = pdfkit.from_url("127.0.0.1:5000/display_to_generate_pdf", "speed_estimation_result.pdf")
+
+    email_id = request.form["email"]
+    print(email_id)
+    return render_template("email_sent.html")
+
+@app.route("/display_to_generate_pdf")
+def display_to_generate_pdf():
+    speeds = fetching_speed_values_from_database()
+    return render_template("display_to_generate_pdf.html", speeds=speeds)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
