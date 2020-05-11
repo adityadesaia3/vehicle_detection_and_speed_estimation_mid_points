@@ -4,14 +4,14 @@ from mysql.connector import Error
 def estimate_speed(top_left_coordinates_x, top_left_coordinates_y, top_right_coordinates_x, top_right_coordinates_y, bottom_left_coordinates_x, bottom_left_coordinates_y, bottom_right_coordinates_x, bottom_right_coordinates_y, fps_of_video, calibration_distance, traffic_flow):
     
     # calibration details
-    top_left = (int(top_left_coordinates_x), int(top_left_coordinates_y))
-    top_right = (int(top_right_coordinates_x), int(top_right_coordinates_y))
-    bottom_left = (int(bottom_left_coordinates_x), int(bottom_left_coordinates_y))
-    bottom_right = (int(bottom_right_coordinates_x), int(bottom_right_coordinates_y))
-    distance = int(calibration_distance)
+    top_left = (float(top_left_coordinates_x), float(top_left_coordinates_y))
+    top_right = (float(top_right_coordinates_x), float(top_right_coordinates_y))
+    bottom_left = (float(bottom_left_coordinates_x), float(bottom_left_coordinates_y))
+    bottom_right = (float(bottom_right_coordinates_x), float(bottom_right_coordinates_y))
+    distance = float(calibration_distance)
 
     # Video Details
-    frames_per_second = int(fps_of_video)
+    frames_per_second = float(fps_of_video)
 
     try:
         connection = mysql.connector.connect(host='localhost', database='vehicle_db', user='root', password='')
