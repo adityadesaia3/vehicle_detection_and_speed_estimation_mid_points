@@ -43,7 +43,7 @@ def yolo_detection(filename, fps_of_video):
 
     parser.add_argument('-vo', '--video-output-path',
 		type=str,
-        default='./output.mp4',
+        default='./' + filename,
 		help='The path of the output video file')
 
     parser.add_argument('-l', '--labels',
@@ -149,6 +149,8 @@ def yolo_detection(filename, fps_of_video):
 
                 while True:
                     grabbed, frame = vid.read()
+
+                    # frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
 
                     # Checking if the complete video is read
                     if not grabbed:

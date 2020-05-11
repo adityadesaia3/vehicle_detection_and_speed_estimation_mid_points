@@ -40,12 +40,12 @@ def estimate_speed(top_left_coordinates_x, top_left_coordinates_y, top_right_coo
                         b_y = float(each_result[2])
                         
                         if frame_count_start == None:
-                            if ((top_left[1] - 20) < b_y < (top_left[1] + 20)) or (b_y > top_left[1]):
+                            if (b_y > top_left[1]):
                                 frame_count_start = frame_count
                                 continue
                         
                         if frame_count_start and frame_count_end == None:
-                            if ((bottom_left[1] - 20) < b_y < (bottom_left[1] + 20)) or (b_y > bottom_left[1]):
+                            if (b_y > bottom_left[1]):
                                 frame_count_end = frame_count
                         
                         if frame_count_start and frame_count_end:

@@ -11,6 +11,9 @@ import sys
 
 from PIL import Image
 
+# to see whether the point is inside the quadrilateral or not
+from matplotlib import path
+
 connection = None
 cursor = None
 frame_1 = 0
@@ -99,15 +102,60 @@ def is_point_inside(bottom_mid_point):
     x = bottom_mid_point[0]
     y = bottom_mid_point[1]
 
-    # Need modification CRUCIAL
+    # Himanshu's idea --> to find whether a point is inside a quadrilateral or not
+    # x1 = bottom_left_coordinates_x, y1 = bottom_left_coordinates_y
+    # x2 = bottom_right_coordinates_x, y2 = bottom_right_coordinates_y
+    # x3 = top_right_coordinates_x, y3 = top_right_coordinates_y
+    # x4 = top_left_coordinates_x, y4 = top_left_coordinates_y
+
+    # m1 = (y1 - y4) / (x1 - x4)
+    # m2 = (y2 - y3) / (x2 - x3)
+
+    # if  ((y < m1 * (x - x1)) and
+    #     (y < m2 * (x - x2)) and
+    #     (y - y3) and
+    #     (y)):
+    #     print(True)
+
+    # verts = [
+    # (0., 0.),  # left, bottom
+    # (0., 1.),  # left, top
+    # (1., 1.),  # right, top
+    # (1., 0.),  # right, bottom
+    # (0., 0.),  # ignored
+    # ]
+
+    # to find whether a point is inside a quadrilateral or not
+    # origin is at top left corner
+    p = path.Path   ([  
+                        (top_left_coordinates_x, top_left_coordinates_y),           # left, top
+                        (bottom_left_coordinates_x, bottom_left_coordinates_y),     # left, bottom
+                        (bottom_right_coordinates_x, bottom_right_coordinates_y),   # right, bottom
+                        (top_right_coordinates_x, top_right_coordinates_y)          # right, top
+                    ])
+    print(f"Origin is at top Contains point: {p.contains_points([(x, y)])[0]}")
+    return p.contains_points([(x, y)])[0]
+
+    # to find whether a point is inside a quadrilateral or not
+    # origin is at bottom left corner
+    # p = path.Path   ([  
+    #                     (bottom_left_coordinates_x, bottom_left_coordinates_y),     # left, bottom
+    #                     (top_left_coordinates_x, top_right_coordinates_x),          # left, top
+    #                     (top_right_coordinates_x, top_right_coordinates_y),         # right, top
+    #                     (bottom_right_coordinates_x, bottom_right_coordinates_y)    # right, bottom
+    #                 ])
+    # print(f"Origin is at bottom Contains point: {p.contains_points([(x, y)])[0]}")
+
     # p = path.Path([(top_left_coordinates_x, top_left_coordinates_y), (top_right_coordinates_x, top_right_coordinates_y), (bottom_left_coordinates_x, bottom_left_coordinates_y), (bottom_right_coordinates_x, bottom_right_coordinates_y)])
     # return p.contains_points([(x, y)])[0]
     
-    if top_left_coordinates_x <= x <= top_right_coordinates_x or bottom_left_coordinates_x <= x <= bottom_right_coordinates_x:
-        if top_left_coordinates_y <= y <= bottom_left_coordinates_y or top_right_coordinates_y <= y <= bottom_right_coordinates_y:
-            return True 
-    else:
-        return False
+    # if top_left_coordinates_x <= x <= top_right_coordinates_x or bottom_left_coordinates_x <= x <= bottom_right_coordinates_x:
+    #     if top_left_coordinates_y <= y <= bottom_left_coordinates_y or top_right_coordinates_y <= y <= bottom_right_coordinates_y:
+    #         print(True)
+    #         return True
+    # else:
+    #     print(False)
+    #     return False
 
 
 def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, labels):
@@ -164,7 +212,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
 
                 # car = 2
                 # truck = 7
-                if classids[i] == 2 and distance_x > 50 and distance_y > 50:
+                if (classids[i] == 2 or classids[i] == 7) and distance_x > 50 and distance_y > 50:
                     # Crop boxed image
                     cropped_img = new_img.crop((x, y, x+w, y+h))
                     # Save that image temporarily
@@ -253,7 +301,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
                         count_cropped += 1
                     else:
                         # do this
-                        print("new vehicle = False")
+                        print(f"new vehicle = False Vehicle number: {vehicle_number}")
                         cropped_img.save("static/" + str(vehicle_number) + ".jpg")
 
                         # Add the coordinate of the line into the table
@@ -279,7 +327,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
                 pass
             elif (is_close_to_second_line):
                 
-                if classids[i] == 2 and distance_x > 50 and distance_y > 50:
+                if (classids[i] == 2 or classids[i] == 7) and distance_x > 50 and distance_y > 50:
 
                     # Crop boxed image
                     cropped_img = new_img.crop((x, y, x+w, y+h))
@@ -332,7 +380,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
 
                             perpendicular_distance = perpendicular_distance_from_second_line(bottom_mid_point[0], bottom_mid_point[1])
                             print(f"Perpendicular distance: {perpendicular_distance}\tMinimum Distance: {minimum_distance}")
-                            if perpendicular_distance > minimum_distance or minimum_distance > 100:
+                            if minimum_distance > 150 or perpendicular_distance > minimum_distance:
                                 vehicle_number = None
                         except:
                             print("Unexpected error:", sys.exc_info()[0])
@@ -343,7 +391,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
                         
                         if vehicle_number:
                             set_of_vehicles.remove(vehicle_number)
-                            print("end vehicle")
+                            print(f"end vehicle {vehicle_number}")
                             cropped_img.save("static/" + str(vehicle_number) + ".jpg")
 
                             # Add the coordinate of the line into the table
