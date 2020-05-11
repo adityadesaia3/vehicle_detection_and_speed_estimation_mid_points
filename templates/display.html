@@ -1,52 +1,42 @@
 {% extends "header_footer.html" %}
 
     {% block content %}
-            <div class="row">
-                <div class="col-sm-12 d-flex justify-content-center">
-                    <button class="btn btn-light"> <a href="{{url_for("display")}}"> Click here to Display Speed of Vehicles! </a> </button>
-                </div>
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <button class="btn btn-light"> <a href="{{url_for("display")}}"> Click here to Display Speed of Vehicles! </a> </button>
             </div>
-            <hr>
-            <div class="display-4 d-flex justify-content-center">
-                <strong> Displaying Speed of Vehicles </strong>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-3 d-flex justify-content-center">
-                    <h5> Vehicle Count </h5>
-                </div>
-                <div class="col-sm-3 d-flex justify-content-center">
-                    <h5> Speed of Vehicle (km/h) </h5>
-                </div>
-                <div class="col-sm-3 d-flex justify-content-center">
-                    <h5> Image </h5>
-                </div>
-                <div class="col-sm-3 d-flex justify-content-center">
-                    <h5> Violation of Speed Limit (80 km/h) </h5>
-                </div>
-            </div>
+        </div>
+        <hr>
+        <div class="display-4 d-flex justify-content-center">
+            <strong> Displaying Speed of Vehicles </strong>
+        </div>
+        <hr>
 
-            {% for speed_path_tuple in speeds %}   
-                <div class="row">
-                    <div class="col-sm-3 d-flex justify-content-center">
-                        <h5> {{loop.index}} </h5>
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-center">
-                        <h6> {{speed_path_tuple[0]}} </h6>
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-center">
-                        <img src="{{speed_path_tuple[1]}}" alt="" srcset="">
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-center">
-                        <h6> 
-                            {% if speed_path_tuple[0] | int > 80 %}
-                                {{"YES"}}
-                            {% else %}
-                                {{"NO"}}
-                            {% endif %}
-                        </h6>
-                    </div>
-                </div>
-            {% endfor %}
-            
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Vehicle Count</th>
+                    <th scope="col">Speed of Vehicle (km/h)</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Violation of Speed Limit (80 km/h)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for speed_path_tuple in speeds %}
+                    <tr>
+                        <th scope="row">{{loop.index}}</th>
+
+                        <td>{{speed_path_tuple[0]}}</td>
+                        
+                        <td><img src="{{speed_path_tuple[1]}}" alt="" srcset=""></td>
+                        
+                        {% if speed_path_tuple[0] | int > 80 %}
+                            <td>{{"YES"}}</td>
+                        {% else %}
+                            <td>{{"NO"}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endblock %}

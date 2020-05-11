@@ -212,7 +212,8 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
 
                 # car = 2
                 # truck = 7
-                if (classids[i] == 2 or classids[i] == 7) and distance_x > 50 and distance_y > 50:
+                # bus = 5
+                if (classids[i] == 2 or classids[i] == 7 or classids[i] == 5) and distance_x > 50 and distance_y > 50:
                     # Crop boxed image
                     cropped_img = new_img.crop((x, y, x+w, y+h))
                     # Save that image temporarily
@@ -327,7 +328,7 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
                 pass
             elif (is_close_to_second_line):
                 
-                if (classids[i] == 2 or classids[i] == 7) and distance_x > 50 and distance_y > 50:
+                if (classids[i] == 2 or classids[i] == 7 or classids[i] == 5) and distance_x > 50 and distance_y > 50:
 
                     # Crop boxed image
                     cropped_img = new_img.crop((x, y, x+w, y+h))
