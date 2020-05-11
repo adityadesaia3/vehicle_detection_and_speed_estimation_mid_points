@@ -5,4 +5,4 @@ yolov3.weights
 /__pycache__
 *.png
 .vscode
-.pdf
+*.pdf
