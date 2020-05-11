@@ -6,3 +6,5 @@ pip install flask
 pip install wheel
 pip install matplotlib
 pip install pdfkit
+pip install secure-smtplib
+pip install email-to

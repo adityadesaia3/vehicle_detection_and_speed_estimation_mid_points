@@ -15,6 +15,10 @@ from display_speeds import fetching_speed_values_from_database
 # for generating pdf
 import pdfkit
 
+# for sending email
+import smtplib
+from email.message import EmailMessage
+
 app = Flask(__name__)
 app.secret_key = b'qE7psRxhW}QUu\Mb'
 filename = ""
@@ -124,8 +128,32 @@ def email_sent():
     # generate PDF
     pdf = pdfkit.from_url("127.0.0.1:5000/display_to_generate_pdf", "speed_estimation_result.pdf")
 
-    email_id = request.form["email"]
-    print(email_id)
+
+    # send email
+    receiver_email = request.form["email"]
+
+    EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
+    EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+    print(EMAIL_ADDRESS, EMAIL_PASSWORD)
+
+    msg = EmailMessage()
+    msg["Subject"] = "Speed Estimation Result"
+    msg["From"] = EMAIL_ADDRESS
+    msg["To"] = receiver_email
+    msg.set_content("Speed estimation result of your input video is created. Please check attached .pdf file to view the full report.")
+
+    files = ["speed_estimation_result.pdf"]
+    for file in files:
+        with open(file, "rb") as f:
+            file_data = f.read()
+            file_name = f.name
+
+        msg.add_attachment(file_data, maintype="application", subtype="octet-stream", filename=file_name)
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+        smtp.send_message(msg)
+
     return render_template("email_sent.html")
 
 @app.route("/display_to_generate_pdf")
