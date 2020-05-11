@@ -3,3 +3,6 @@
 1. create "static" folder inside main directory
 2. create "videos" folder inside "templates" directory
 3. add "yolov3.weight" file inside "yolov3-coco" directory
+
+### to generate PDF
+1. download "wkhtmltopdf" and set wkhtmltopdf/bin path to environment variables
