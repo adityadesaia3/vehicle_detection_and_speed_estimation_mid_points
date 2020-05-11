@@ -1,1 +1,3 @@
 https://matplotlib.org/3.2.1/tutorials/advanced/path_tutorial.html
+https://wkhtmltopdf.org/downloads.html
+https://pypi.org/project/pdfkit/
