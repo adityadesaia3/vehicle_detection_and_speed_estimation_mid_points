@@ -6,6 +6,21 @@
         </div>
         <hr>
 
+        <form class="form-inline justify-content-center" method="POST" action={{url_for("email_sent")}}>
+            
+            <label class="sr-only" for="inlineFormInputGroupUsername2">Email</label>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                <div class="input-group-text">Enter Email</div>
+                </div>
+                <input type="email" class="form-control" id="email" name="email" placeholder="To send you the PDF">
+            </div>
+            
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+
+        <hr>
+
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
