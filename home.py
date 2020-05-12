@@ -134,7 +134,6 @@ def email_sent():
 
     EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
     EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
-    print(EMAIL_ADDRESS, EMAIL_PASSWORD)
 
     msg = EmailMessage()
     msg["Subject"] = "Speed Estimation Result"
