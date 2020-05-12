@@ -134,7 +134,12 @@ def yolo_detection(filename, fps_of_video):
                     cursor.execute("create database vehicle_db")
                     print("Database created.")
                 except:
-                    print("Database already exists. Connecting to database...")
+                    print("Database already exists.")
+                    print("Droping it")
+                    cursor.execute("DROP DATABASE vehicle_db")
+                    print("Creating New Database")
+                    cursor.execute("create database vehicle_db")
+                    print("New Database Created!")
                 finally:
                     cursor.close()
                     connection.commit()
@@ -146,6 +151,14 @@ def yolo_detection(filename, fps_of_video):
                     cursor = connection.cursor()
 
                     print("Connected to database: 'vehicle_db'")
+
+
+                    # removing all files from static folder
+                    dir_path = os.path.dirname(os.path.realpath(__file__))
+                    dir_path += "/static/"
+                    files_to_remove = os.listdir(dir_path)
+                    for file in files_to_remove:
+                        os.remove(os.path.join(dir_path, file))
 
                 while True:
                     grabbed, frame = vid.read()
@@ -166,7 +179,7 @@ def yolo_detection(filename, fps_of_video):
                     if writer is None:
                         # Initialize the video writer
                         fourcc = cv.VideoWriter_fourcc(*"mp4v")
-                        writer = cv.VideoWriter(FLAGS.video_output_path, fourcc, int(fps_of_video), 
+                        writer = cv.VideoWriter(FLAGS.video_output_path, fourcc, float(fps_of_video), 
                                         (frame.shape[1], frame.shape[0]), True)
 
                     writer.write(frame)

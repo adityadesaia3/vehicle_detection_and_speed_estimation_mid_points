@@ -4,3 +4,4 @@ https://pypi.org/project/pdfkit/
 https://www.youtube.com/watch?v=m3u3oLgDcJI (HTML to PDF with Python)
 https://www.youtube.com/watch?v=JRCJ6RtE3xU&t=1180s (How to Send Emails Using Python - Plain Text, Adding Attachments, HTML Emails, and More)
 https://www.youtube.com/watch?v=IolxqkL7cD8 (Python Quick Tip: Hiding Passwords and Secret Keys in Environment Variables (Windows))
+https://www.kapwing.com/
