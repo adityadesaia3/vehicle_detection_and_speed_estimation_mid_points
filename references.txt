@@ -6,3 +6,4 @@ https://www.youtube.com/watch?v=JRCJ6RtE3xU&t=1180s (How to Send Emails Using Py
 https://www.youtube.com/watch?v=IolxqkL7cD8 (Python Quick Tip: Hiding Passwords and Secret Keys in Environment Variables (Windows))
 https://www.kapwing.com/
 https://github.com/iArunava/YOLOv3-Object-Detection-with-OpenCV
+https://stackoverflow.com/questions/29567068/does-opencv-code-run-on-the-gpu
