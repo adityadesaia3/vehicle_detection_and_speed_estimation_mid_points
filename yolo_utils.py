@@ -317,8 +317,8 @@ def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, label
                     # Draw the bounding box rectangle and label on the image
                     cv.rectangle(img, (x, y), (x+w, y+h), color, 6)
                     #print("classid {} i = {}".format(classids[i], i))
-                    text = "{}: {:4f}".format(labels[classids[i]], confidences[i])
-                    cv.putText(img, text, (x, y-5), cv.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                    text = "{}: {}".format(labels[classids[i]], vehicle_number)
+                    cv.putText(img, text, (x, y-5), cv.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
                     print("{}\tTopL = {},\tBottomR = {},\tMid = {},\tBottom_Mid = {},\tName = {}".format(count, top_left, bottom_right, mid_point, bottom_mid_point, text))
                 else:
