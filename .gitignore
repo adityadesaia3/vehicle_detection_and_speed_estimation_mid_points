@@ -6,3 +6,4 @@ yolov3.weights
 *.png
 .vscode
 *.pdf
+*.docx

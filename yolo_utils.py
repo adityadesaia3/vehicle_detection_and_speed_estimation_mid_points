@@ -40,6 +40,7 @@ bottom_left_coordinates_y = None
 bottom_right_coordinates_x = None
 bottom_right_coordinates_y = None
 
+
 def perpendicular_distance_from_first_line(x, y):
     global top_left_coordinates_x, top_left_coordinates_y, top_right_coordinates_x, top_right_coordinates_y
 
@@ -447,6 +448,7 @@ def generate_boxes_confidences_classids(outs, height, width, tconf):
                 classids.append(classid)
 
     return boxes, confidences, classids
+
 
 def infer_image(net, layer_names, height, width, img, colors, labels, connection_db, cursor_db, FLAGS, 
             boxes=None, confidences=None, classids=None, idxs=None, infer=True):
