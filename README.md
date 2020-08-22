@@ -10,3 +10,7 @@
 ### to send email
 1. add two environment variables to your local machine. EMAIL_ADDRESS and EMAIL_PASSWORD of your gmail account.
 2. authorize less secure access
+
+### to run the project
+1. download and install XAMPP
+2. Start "Apache" and "MySQL" services
