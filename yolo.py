@@ -90,7 +90,10 @@ def yolo_detection(filename, fps_of_video):
 
 	# Load the weights and configuration to form the pretrained YOLOv3 model
     net = cv.dnn.readNetFromDarknet(FLAGS.config, FLAGS.weights)
+    net.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
+    net.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA)
 
+    
 	# Get the output layer names of the model
     layer_names = net.getLayerNames()
     layer_names = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
