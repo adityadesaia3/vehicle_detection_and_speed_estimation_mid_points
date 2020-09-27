@@ -14,3 +14,6 @@
 ### to run the project
 1. download and install XAMPP
 2. Start "Apache" and "MySQL" services
+
+# error
+[ WARN:0] global C:\Users\appveyor\AppData\Local\Temp\1\pip-req-build-wwma2wne\opencv\modules\dnn\src\dnn.cpp (1429) cv::dnn::dnn4_v20200609::Net::Impl::setUpNet DNN module was not built with CUDA backend; switching to CPU
